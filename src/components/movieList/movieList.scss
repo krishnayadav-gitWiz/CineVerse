@@ -1,0 +1,76 @@
+/* stylelint-disable at-rule-no-unknown */
+@import '../../sass/';
+
+.movie-wrapper {
+  padding: 30px;
+  margin-top: 60px;
+}
+
+.search-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+  padding: 0 20px;
+
+  form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 800px; // increased max-width for a longer input area
+
+    input {
+      font-size: 18px;
+      flex: 4; // increased flex value so input takes more space than the button
+      padding: 5px 10px;
+      height: 38px;
+      outline: none;
+      border: none;
+      border-radius: 10px;
+      background: #272727;
+      color: $txt-color; // Ensure $txt-color is defined in your imported file.
+    }
+
+    button {
+      flex: 1; // button takes less space relative to input
+      padding: 0 8px;
+      font-size: 20px;
+      cursor: pointer;
+      height: 35px;
+      border: none;
+      background: #d95d39;
+      outline: none;
+      border-radius: 8px;
+      margin-left: 8px;
+    }
+  }
+}
+
+.movie-list,
+.shows-list {
+  margin: 20px 0;
+
+  h2 {
+    color: #d95d39;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  // Assumes the immediate child div contains the movie/show cards.
+  & > div {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+}
+
+// Responsive adjustments using the mobile mixin
+@include mobile {
+  .search-bar {
+    form {
+      max-width: 100%;
+    }
+  }
+}
