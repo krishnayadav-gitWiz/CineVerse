@@ -17,22 +17,27 @@
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: 800px; // increased max-width for a longer input area
+    max-width: 800px;
+
+    .form-group {
+      display: flex;
+      width: 100%;
+    }
 
     input {
       font-size: 18px;
-      flex: 4; // increased flex value so input takes more space than the button
+      flex: 4;
       padding: 5px 10px;
       height: 38px;
       outline: none;
       border: none;
       border-radius: 10px;
       background: #272727;
-      color: $txt-color; // Ensure $txt-color is defined in your imported file.
+      color: $txt-color;
     }
 
     button {
-      flex: 1; // button takes less space relative to input
+      flex: 1;
       padding: 0 8px;
       font-size: 20px;
       cursor: pointer;
@@ -57,20 +62,67 @@
     font-weight: 700;
     text-transform: uppercase;
   }
+}
 
-  // Assumes the immediate child div contains the movie/show cards.
-  & > div {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+// Styles specifically for the slider container
+.movie-container {
+  margin: 0 -10px;
+  
+  .slick-slide {
+    padding: 0 10px;
+  }
+  
+  // Make sure cards are visible
+  .slick-track {
+    display: flex;
+    
+    // This ensures cards have equal height
+    .slick-slide {
+      height: auto;
+      
+      & > div {
+        height: 100%;
+      }
+    }
+  }
+  
+  // Style the arrow buttons
+  .slick-arrow {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    z-index: 1;
+    
+    &:hover, &:focus {
+      background: rgba(0, 0, 0, 0.8);
+    }
+    
+    &::before {
+      color: #FF9933;
+    }
+  }
+  
+  // Adjust prev arrow position
+  .slick-prev {
+    left: 10px;
+  }
+  
+  // Adjust next arrow position
+  .slick-next {
+    right: 10px;
   }
 }
 
-// Responsive adjustments using the mobile mixin
+// Responsive adjustments
 @include mobile {
   .search-bar {
     form {
       max-width: 100%;
+    }
+  }
+  
+  .movie-container {
+    .slick-arrow {
+      display: none !important;
     }
   }
 }

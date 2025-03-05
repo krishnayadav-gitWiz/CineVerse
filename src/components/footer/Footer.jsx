@@ -32,6 +32,9 @@ const Footer = () => {
             <Link to="/">Top IMDB</Link>
           </div>
         </div>
+        <div className="footer__content__copyright">
+          <p>CineVerse © 2025 | Created with ♥ by krishna.yadav_in.</p>
+        </div>
       </div>
     </div>
   );

@@ -20,6 +20,7 @@
     "react-test-renderer": "^18.2.0",
     "redux": "^4.2.0",
     "sass": "^1.85.1",
+    "slick-carousel": "^1.8.1",
     "swiper": "^6.8.4",
     "web-vitals": "^2.1.4"
   },

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Slider from 'react-slick';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getAllMovies,
@@ -8,6 +9,10 @@ import {
 } from '../../redux/moviesSlice/moviesSlice';
 import MovieCard from '../movieCard/MovieCard';
 import './movieList.scss';
+
+// Assuming you have a Settings import or define it here
+// If you don't have this file, I'll provide an example configuration below
+import Settings from '../../settings';
 
 const MovieList = () => {
   const [term, setTerm] = useState('');
@@ -30,32 +35,30 @@ const MovieList = () => {
     }
   };
 
-  const renderMovies = (movies.Response === 'True' ? (
-    <div className="movie-list">
-      {movies.Search.map((movie) => (
-        <MovieCard key={movie.imdbID} data={movie} />
-      ))}
-    </div>
+  // Preparing the rendering of movies for the slider
+  const renderMovies = movies.Response === 'True' ? (
+    movies.Search.map((movie) => (
+      <MovieCard key={movie.imdbID} data={movie} />
+    ))
   ) : (
     <div className="movies-error">
       {movies.Error || 'No movies found'}
     </div>
-  ));
+  );
 
-  const renderShows = (shows.Response === 'True' ? (
-    <div className="shows-list">
-      {shows.Search.map((show) => (
-        <MovieCard key={show.imdbID} data={show} />
-      ))}
-    </div>
+  // Preparing the rendering of shows for the slider
+  const renderShows = shows.Response === 'True' ? (
+    shows.Search.map((show) => (
+      <MovieCard key={show.imdbID} data={show} />
+    ))
   ) : (
     <div className="shows-error">
       {shows.Error || 'No shows found'}
     </div>
-  ));
+  );
 
   return (
-    <div className="movie-wrapper">
+    <div>
       <div className="search-bar">
         <form onSubmit={submitHandler}>
           <div className="form-group">
@@ -75,14 +78,38 @@ const MovieList = () => {
         </form>
       </div>
 
-      <div className="movie-list">
-        <h1>Movies</h1>
-        {renderMovies}
-      </div>
+      <div className="movie-wrapper">
+        <div className="movie-list">
+          <h2>Movies</h2>
+          <div className="movie-container">
+            <Slider
+              dots={Settings.dots}
+              infinite={Settings.infinite}
+              speed={Settings.speed}
+              slidesToShow={Settings.slidesToShow}
+              slidesToScroll={Settings.slidesToScroll}
+              responsive={Settings.responsive}
+            >
+              {renderMovies}
+            </Slider>
+          </div>
+        </div>
 
-      <div className="shows-list">
-        <h1>Shows</h1>
-        {renderShows}
+        <div className="shows-list">
+          <h2>Shows</h2>
+          <div className="movie-container">
+            <Slider
+              dots={Settings.dots}
+              infinite={Settings.infinite}
+              speed={Settings.speed}
+              slidesToShow={Settings.slidesToShow}
+              slidesToScroll={Settings.slidesToScroll}
+              responsive={Settings.responsive}
+            >
+              {renderShows}
+            </Slider>
+          </div>
+        </div>
       </div>
     </div>
   );
