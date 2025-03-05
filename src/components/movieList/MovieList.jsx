@@ -22,8 +22,8 @@ const MovieList = () => {
   const shows = useSelector(getAllShows);
 
   useEffect(() => {
-    dispatch(fetchAsyncMovies('Marvel'));
-    dispatch(fetchAsyncShows('Marvel'));
+    dispatch(fetchAsyncMovies('Superhero'));
+    dispatch(fetchAsyncShows('Superhero'));
   }, [dispatch]);
 
   const submitHandler = (e) => {
